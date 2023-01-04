@@ -40,13 +40,10 @@ SELECT last_name FROM employees JOIN orders WHERE employees.id=0 AND employees.i
 SELECT name FROM suppliers WHERE EXISTS (SELECT * FROM products WHERE suppliers.id=products.supplier_id AND products.price < 20);
 SELECT name FROM suppliers WHERE EXISTS (SELECT * FROM products WHERE suppliers.id=products.supplier_id AND products.price = 22);
 
-SELECT name FROM products WHERE ANY (SELECT * FROM orders_details WHERE  HAVING Count(orders_details.product_id)=10);
-SELECT
-SELECT
-SELECT
+SELECT name FROM products WHERE products.id = ANY (SELECT * FROM orders_details HAVING Count(orders_details.product_id)=10);
+SELECT products;
+SELECT;
+SELECT;
 
-SELECT name CASE 
-WHEN orders_details.quantity>30 THEN 'Liczba sztuk jest większa niż 30'
-WHEN orders_details.quantity=30 THEN 'Liczba sztuk jest równa 30'
-ELSE 'Liczba sztuk jest mniejsza niż 30'
-END AS Liczba_Sztuk
+SELECT *, CASE WHEN quantity>30 THEN 'Liczba sztuk jest większa niż 30' WHEN quantity=30 THEN 'Liczba sztuk jest równa 30' ELSE 'Liczba sztuk jest mniejsza niż 30' END AS Liczba_Sztuk FROM orders_details; 
+SELECT customers.customer_name,customers.city,customers.country FROM customers ORDER BY CASE WHEN customers.city!=NULL THEN customers.city ELSE customers.country END ASC;
